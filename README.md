@@ -6,8 +6,8 @@ If your branch name contains a [Jira issue key](https://confluence.atlassian.com
 
 | Command | Log entry |
 | ------- | --------- |
-| git commit -m "release the kraken." | ABC-123 Release the kraken<br> |
-| git commit -m "Release the kraken<br><br>A kraken lives in dark depths, usually a sunken rift or a cavern filled with detritus, treasure, and wrecked ships." | ABC-123 Release the kraken<br><br>ABC-123 #comment A kraken lives in dark depths, usually a sunken rift or a cavern filled with detritus, treasure, and wrecked ships.<br><br>_Effect:_ Posts a comment to the Jira issue. |
+| git commit -m "release the kraken." | ABC-123 Release the kraken<br><br>ABC-123 #time 0w 0d 2h 8m Release the kraken<br><br>_Effect:_ Logs the time since your last commit on any branch in the Work Log tab. |
+| git commit -m "Release the kraken<br><br>A kraken lives in dark depths, usually a sunken rift or a cavern filled with detritus, treasure, and wrecked ships." | ABC-123 Release the kraken<br><br>ABC-123 #comment A kraken lives in dark depths, usually a sunken rift or a cavern filled with detritus, treasure, and wrecked ships.<br><br>ABC-123 #time 0w 0d 2h 8m Release the kraken<br><br>_Effect:_ Posts a comment to the Jira issue and logs the time since your last commit in the Work Log tab. |
 
 If the branch name does not contain a Jira issue key, the commit message is not modified. 
 
