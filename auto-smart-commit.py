@@ -56,7 +56,30 @@ def num_nights(start: datetime, end: datetime) -> int:
     return max(n, 0)
 
 
-
+def time_worked_on_commit() -> Optional[str]:
+    now = datetime.now()
+    last = last_commit_datetime()
+    # Determine the number of minutes worked on this commit as the number of
+    # minutes since the last commit minus the lunch breaks and nights.
+    working_hours_per_day = 8
+    working_days_per_week = 5
+    minutes = max(
+        round((now - last).total_seconds() / 60)
+        - num_nights(last, now) * (24 - working_hours_per_day) * 60
+        - num_lunches(last, now) * 45,
+        0,
+    )
+    # Convert the number of minutes worked to working weeks, days, hours,
+    # minutes.
+    if minutes > 0:
+        hours = floor(minutes / 60)
+        minutes -= hours * 60
+        days = floor(hours / working_hours_per_day)
+        hours -= days * working_hours_per_day
+        weeks = floor(days / working_days_per_week)
+        days -= weeks * working_days_per_week
+        return f"{weeks}w {days}d {hours}h {minutes}m"
+    return None
 
 def main() -> NoReturn:
     # https://confluence.atlassian.com/fisheye/using-smart-commits-960155400.html
