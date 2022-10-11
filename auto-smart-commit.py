@@ -102,6 +102,11 @@ def main() -> NoReturn:
     # 1. If there is a body, turn it into a comment on the issue.
     if "#comment" not in commit_msg and commit_body:
         commit_body = f"{jira_issue_key} #comment {commit_body}"
+    # 2. Add the time worked to the Work Log in the commit body.
+    work_time = time_worked_on_commit()
+    if "#time" not in commit_msg and work_time:
+        work_log = f"{jira_issue_key} #time {work_time} {commit_subject}"
+        commit_body = f"{commit_body}\n\n{work_log}" if commit_body else work_log
     # 2. Make sure the subject starts with a Jira issue key.
     if not extract_jira_issue_key(commit_subject):
         commit_subject = f"{jira_issue_key} {commit_subject}"
